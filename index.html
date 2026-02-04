@@ -1,76 +1,98 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>void</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exv1z1 | Bio</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff41; /* Классический хакерский зеленый */
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: monospace;
-    }
+        .container {
+            border: 1px solid #00ff41;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+            max-width: 400px;
+            width: 90%;
+            text-align: left;
+        }
 
-    body {
-      background: #000;
-      color: #e5e5e5;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-    .container {
-      text-align: center;
-      animation: fadeIn 1.5s ease;
-    }
+        .status {
+            display: inline-block;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
 
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-    }
+        p {
+            line-height: 1.6;
+            color: #a0a0a0;
+        }
 
-    p {
-      font-size: 1rem;
-      opacity: 0.7;
-      margin-bottom: 30px;
-    }
+        .links {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    a {
-      color: #fff;
-      text-decoration: none;
-      border: 1px solid #444;
-      padding: 10px 20px;
-      transition: 0.3s;
-    }
+        .links a {
+            color: #00ff41;
+            text-decoration: none;
+            border: 1px solid #00ff41;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
 
-    a:hover {
-      background: #fff;
-      color: #000;
-    }
+        .links a:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px #00ff41;
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>VOID</h1>
-    <p>nothing here. yet.</p>
-    <a href="#">enter</a>
-  </div>
+<div class="container">
+    <h1>exv1z1_<span class="cursor">|</span></h1>
+    <div class="status">ONLINE</div>
+    
+    <p>> Coder & Enthusiast<br>
+       > building something new...<br>
+       > system_log: initialized</p>
+
+    <div class="links">
+        <a href="https://github.com/exv1z1">GITHUB</a>
+        <a href="#">TELEGRAM</a>
+        <a href="#">DISCORD</a>
+    </div>
+</div>
 
 </body>
 </html>
