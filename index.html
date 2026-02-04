@@ -3,129 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>exv1z1 | System</title>
+    <title>REMAKED // SYSTEM</title>
     <style>
+        :root {
+            --color: #00ff41;
+            --dim-color: #003b11;
+        }
+
         body {
-            background-color: #050505;
-            color: #00ff41;
+            background-color: #020202;
+            color: var(--color);
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Чтобы не было полос прокрутки */
+            overflow-x: hidden;
+            text-transform: uppercase;
         }
 
-        /* Эффект старого монитора */
-        body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
+        /* Эффект мерцания монитора */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(18, 16, 16, 0.05);
+            opacity: 0;
+            z-index: 20;
+            pointer-events: none;
+            animation: flicker 0.12s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.02; }
+            100% { opacity: 0.09; }
+        }
+
+        .scanline {
+            width: 100%; height: 100px; z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1; position: absolute; bottom: 100%;
+            animation: scanline 8s linear infinite;
             pointer-events: none;
         }
 
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
         .container {
-            border: 1px solid #00ff41;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            width: 90%;
-            max-width: 500px;
+            border: 1px solid var(--color);
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.98);
+            width: 95%;
+            max-width: 500px; /* Сделали чуть уже, но она вытянется вниз */
             position: relative;
-            z-index: 3;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.05);
+            z-index: 5;
         }
 
-        .header {
-            border-bottom: 1px solid #00ff41;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            opacity: 0.7;
+        .top-bar {
+            position: absolute; top: -12px; left: 15px;
+            background: #020202; padding: 0 10px;
+            font-size: 0.7rem; letter-spacing: 2px;
+            border: 1px solid var(--color);
         }
 
-        h1 {
-            font-size: 1.4rem;
-            margin: 10px 0;
-            text-shadow: 0 0 5px #00ff41;
+        .main-title {
+            font-size: 2.5rem; margin: 25px 0 5px 0;
+            font-weight: 900; letter-spacing: 10px;
+            text-shadow: 3px 3px var(--dim-color);
         }
 
-        .sys-logs {
-            font-size: 0.65rem;
-            color: #008f11;
-            margin-bottom: 15px;
-            line-height: 1.2;
+        .status-box {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.7rem; margin-bottom: 30px;
+            color: var(--dim-color);
         }
 
-        .main-info {
-            border-left: 2px solid #00ff41;
-            padding-left: 15px;
-            margin: 15px 0;
+        .online-dot {
+            width: 6px; height: 6px; background-color: var(--color);
+            border-radius: 50%; box-shadow: 0 0 10px var(--color);
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Длинная таблица данных */
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            margin: 20px 0;
+        }
+
+        .stats-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+
+        .stats-table td:last-child {
+            text-align: right;
+            color: #fff;
+        }
+
+        .label { color: var(--dim-color); }
+
+        .bio-box {
+            border-left: 2px solid var(--color);
+            padding-left: 15px; margin: 25px 0;
+            font-size: 0.85rem; line-height: 1.7;
         }
 
         .links {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .links a {
-            color: #00ff41;
-            text-decoration: none;
-            border: 1px solid #00ff41;
-            padding: 4px 8px;
-            font-size: 0.8rem;
-            transition: 0.3s;
+            color: var(--color); text-decoration: none;
+            border: 1px solid var(--color);
+            padding: 10px; text-align: center;
+            font-size: 0.8rem; transition: 0.3s;
         }
 
         .links a:hover {
-            background: #00ff41;
-            color: #000;
+            background: var(--color); color: #000;
+            box-shadow: 0 0 20px var(--color);
         }
 
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        .footer-noise {
+            font-size: 0.55rem; opacity: 0.2;
+            margin-top: 30px; line-height: 1.4;
+            pointer-events: none;
+        }
 
-        .glitch { font-size: 0.7rem; opacity: 0.4; margin-top: 10px; }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
+<div class="scanline"></div>
+
 <div class="container">
-    <div class="header">
-        <span>STATUS: ACTIVE</span>
-        <span>LOC: 127.0.0.1</span>
+    <div class="top-bar">REMAKED://CORE_ACCESS</div>
+
+    <div style="font-size: 0.6rem; color: var(--dim-color);">
+        [LOG] INITIATING TCP_HANDSHAKE... DONE<br>
+        [LOG] BYPASSING FIREWALL... SUCCESS<br>
+        [LOG] EXTRACTING VISITOR_DATA...
     </div>
 
-    <div class="sys-logs">
-        [SYS] Initializing boot sequence...<br>
-        [SYS] Loading modules: crypto_v2, bypass_v1.0.4<br>
-        [SYS] Connection: SECURE_SOCKET_LAYER_ESTABLISHED<br>
-        [DBG] memory_dump: 0x004F3A -> cleared
+    <div class="main-title">REMAKED</div>
+    
+    <div class="status-box">
+        <div class="online-dot"></div>
+        <span>CONNECTION_STABLE // NO_IDLE</span>
     </div>
 
-    <h1>exv1z1_<span class="blink">_</span></h1>
+    <table class="stats-table">
+        <tr>
+            <td class="label">VISITOR_IP:</td>
+            <td id="user-ip">LOADING...</td>
+        </tr>
+        <tr>
+            <td class="label">LOCATION:</td>
+            <td id="user-loc">REMOTE_HOST</td>
+        </tr>
+        <tr>
+            <td class="label">USER_AGENT:</td>
+            <td>ENCRYPTED</td>
+        </tr>
+        <tr>
+            <td class="label">ACCESS_LEVEL:</td>
+            <td>GUEST_04</td>
+        </tr>
+        <tr>
+            <td class="label">ENCRYPTION:</td>
+            <td>AES_256_GCM</td>
+        </tr>
+    </table>
 
-    <div class="main-info">
-        <p>> User: root<br>
-           > Role: Digital Alchemist<br>
-           > Task: Building the void</p>
-    </div>
-
-    <div class="sys-logs">
-        void main() {<br>
-        &nbsp;&nbsp;while(true) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;think(); collect(); build();<br>
-        &nbsp;&nbsp;}<br>
-        }
+    <div class="bio-box">
+        > SYSTEM: REMAKED_OS<br>
+        > STATUS: DEVELOPING_VOID<br>
+        > MODE: STEALTH
     </div>
 
     <div class="links">
@@ -135,10 +200,32 @@
         <a href="#">SOURCE</a>
     </div>
 
-    <div class="glitch">
-        ERR_CONNECTION_ENCRYPTED // SESSION_ID: 95dbf99
+    <div class="footer-noise">
+        SYS_DUMP: 00 1F 4C 99 2A 00 11 B2 FF<br>
+        BIN_DATA: 01110010 01100101 01101101<br>
+        MD5: d41d8cd98f00b204e9800998ecf8427e
     </div>
 </div>
+
+<script>
+    // Скрипт для получения реального IP
+    async function getIP() {
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            document.getElementById('user-ip').innerText = data.ip;
+        } catch (error) {
+            document.getElementById('user-ip').innerText = '127.0.0.1';
+        }
+    }
+    getIP();
+
+    // Защита
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = e => {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
+    };
+</script>
 
 </body>
 </html>
